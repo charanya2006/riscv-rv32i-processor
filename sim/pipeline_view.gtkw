@@ -1,0 +1,79 @@
+[*]
+[*] GTKWave Analyzer Save File
+[*] 5-Stage Pipelined RV32I Processor Waveform Configuration
+[*]
+[dumpfile] "sim/waves.vcd"
+[savefile] "sim/pipeline_view.gtkw"
+[timestart] 0
+[size] 1800 1000
+[pos] 0 0
+*-16.000000 35000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_rv32i_core.
+[treeopen] tb_rv32i_core.dut.
+[treeopen] tb_rv32i_core.dut.u_core.
+@800200
+-CLOCK & RESET
+@28
+tb_rv32i_core.clk
+tb_rv32i_core.rst_n
+@1000200
+-CLOCK & RESET
+@800200
+-HAZARD & PIPELINE CONTROLS
+@28
+tb_rv32i_core.debug_stall
+tb_rv32i_core.debug_flush
+@1000200
+-HAZARD & PIPELINE CONTROLS
+@800200
+-FETCH (IF) STAGE
+@22
+tb_rv32i_core.debug_pc_f[31:0]
+tb_rv32i_core.dut.imem_rdata[31:0]
+@1000200
+-FETCH (IF) STAGE
+@800200
+-DECODE (ID) STAGE
+@22
+tb_rv32i_core.debug_pc_d[31:0]
+tb_rv32i_core.dut.u_core.instr_d[31:0]
+tb_rv32i_core.dut.u_core.rs1_d[4:0]
+tb_rv32i_core.dut.u_core.rs2_d[4:0]
+tb_rv32i_core.dut.u_core.rd_d[4:0]
+@1000200
+-DECODE (ID) STAGE
+@800200
+-EXECUTE (EX) STAGE
+@22
+tb_rv32i_core.debug_pc_e[31:0]
+tb_rv32i_core.dut.u_core.alu_result_e[31:0]
+@28
+tb_rv32i_core.dut.u_core.pc_src_e
+@22
+tb_rv32i_core.dut.u_core.pc_target_e[31:0]
+@1000200
+-EXECUTE (EX) STAGE
+@800200
+-MEMORY (MEM) STAGE
+@22
+tb_rv32i_core.debug_pc_m[31:0]
+tb_rv32i_core.dut.dmem_addr[31:0]
+tb_rv32i_core.dut.dmem_wdata[31:0]
+@28
+tb_rv32i_core.dut.dmem_wen
+tb_rv32i_core.dut.dmem_ren
+@22
+tb_rv32i_core.dut.dmem_rdata[31:0]
+@1000200
+-MEMORY (MEM) STAGE
+@800200
+-WRITEBACK (WB) STAGE
+@22
+tb_rv32i_core.debug_pc_w[31:0]
+@28
+tb_rv32i_core.debug_reg_write_w
+@22
+tb_rv32i_core.debug_rd_w[4:0]
+tb_rv32i_core.debug_result_w[31:0]
+@1000200
+-WRITEBACK (WB) STAGE

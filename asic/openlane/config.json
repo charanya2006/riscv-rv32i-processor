@@ -1,0 +1,43 @@
+{
+    "DESIGN_NAME": "rv32i_core",
+    "VERILOG_FILES": [
+        "dir::../../rtl/pkg/rv32i_pkg.sv",
+        "dir::../../rtl/core/alu.sv",
+        "dir::../../rtl/core/branch_unit.sv",
+        "dir::../../rtl/core/register_file.sv",
+        "dir::../../rtl/core/imm_gen.sv",
+        "dir::../../rtl/core/control_unit.sv",
+        "dir::../../rtl/core/hazard_unit.sv",
+        "dir::../../rtl/core/fetch_stage.sv",
+        "dir::../../rtl/core/if_id_reg.sv",
+        "dir::../../rtl/core/decode_stage.sv",
+        "dir::../../rtl/core/id_ex_reg.sv",
+        "dir::../../rtl/core/execute_stage.sv",
+        "dir::../../rtl/core/ex_mem_reg.sv",
+        "dir::../../rtl/core/memory_stage.sv",
+        "dir::../../rtl/core/mem_wb_reg.sv",
+        "dir::../../rtl/core/writeback_stage.sv",
+        "dir::../../rtl/core/rv32i_core.sv"
+    ],
+    "VERILOG_INCLUDE_DIRS": [
+        "dir::../../rtl/pkg",
+        "dir::../../rtl/core"
+    ],
+    "CLOCK_PORT": "clk_i",
+    "CLOCK_PERIOD": 10.0,
+    "CLOCK_NET": "clk_i",
+    "DESIGN_IS_CORE": true,
+    "FP_CORE_UTIL": 45,
+    "FP_ASPECT_RATIO": 1.0,
+    "FP_PDN_MULTIPLE_GRID": 1,
+    "PL_TARGET_DENSITY": 0.50,
+    "PL_BASIC_PLACEMENT": 0,
+    "SYNTH_STRATEGY": "AREA 0",
+    "SYNTH_MAX_FANOUT": 12,
+    "ROUTING_CORES": 4,
+    "PNR_SDC_FILE": "dir::constraints.sdc",
+    "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
+    "DIODE_INSERTION_STRATEGY": 4,
+    "RUN_CVC": 1,
+    "PRIMARY_SIGNOFF_TOOL": "magic"
+}

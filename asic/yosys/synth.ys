@@ -1,0 +1,50 @@
+#==============================================================================
+# File: synth.ys
+# Description: Standalone Yosys Synthesis Script for RV32I Core
+# Run: yosys -s asic/yosys/synth.ys
+#==============================================================================
+
+# 1. Read SystemVerilog RTL Sources
+read_verilog -sv rtl/pkg/rv32i_pkg.sv
+read_verilog -sv -Irtl/pkg rtl/core/alu.sv
+read_verilog -sv -Irtl/pkg rtl/core/branch_unit.sv
+read_verilog -sv -Irtl/pkg rtl/core/register_file.sv
+read_verilog -sv -Irtl/pkg rtl/core/imm_gen.sv
+read_verilog -sv -Irtl/pkg -Irtl/core rtl/core/control_unit.sv
+read_verilog -sv -Irtl/pkg rtl/core/hazard_unit.sv
+read_verilog -sv -Irtl/pkg rtl/core/fetch_stage.sv
+read_verilog -sv -Irtl/pkg rtl/core/if_id_reg.sv
+read_verilog -sv -Irtl/pkg -Irtl/core rtl/core/decode_stage.sv
+read_verilog -sv -Irtl/pkg rtl/core/id_ex_reg.sv
+read_verilog -sv -Irtl/pkg -Irtl/core rtl/core/execute_stage.sv
+read_verilog -sv -Irtl/pkg rtl/core/ex_mem_reg.sv
+read_verilog -sv -Irtl/pkg rtl/core/memory_stage.sv
+read_verilog -sv -Irtl/pkg rtl/core/mem_wb_reg.sv
+read_verilog -sv -Irtl/pkg rtl/core/writeback_stage.sv
+read_verilog -sv -Irtl/pkg -Irtl/core rtl/core/rv32i_core.sv
+
+# 2. Elaborate Design Hierarchy
+hierarchy -check -top rv32i_core
+
+# 3. High-Level Synthesis Passes
+proc
+opt
+fsm
+opt
+memory -nomap
+opt
+
+# 4. Low-Level Gate Mapping
+techmap
+opt
+
+# 5. Flip-Flop & Logic Optimization
+dfflegalize -cell $_DFF_P_ 01
+clean
+
+# 6. Generate Synthesis Statistics Report
+stat
+
+# 7. Write Synthesized Gate-Level Netlist
+write_verilog -noattr asic/yosys/rv32i_core_synth_netlist.v
+write_json asic/yosys/rv32i_core_synth.json

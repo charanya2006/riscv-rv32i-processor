@@ -1,0 +1,46 @@
+#==============================================================================
+# File: spartan6.ucf
+# Target: Xilinx Spartan-6 FPGA (e.g. XC6SLX9 / XC6SLX16, Nexys-3 / SP606)
+# Description: Physical constraints and pin mappings for RV32I Processor Top
+#==============================================================================
+
+# Clock Constraint (50 MHz Board Oscillator)
+NET "board_clk_i" TNM_NET = "sys_clk_pin";
+TIMESPEC TS_sys_clk_pin = PERIOD "sys_clk_pin" 20000 ps HIGH 50 %;
+
+# Clock Pin
+NET "board_clk_i"       LOC = "V10" | IOSTANDARD = LVCMOS33; # 50 MHz Oscillator
+
+# Push Buttons
+NET "btn_rst_ni"        LOC = "B8"  | IOSTANDARD = LVCMOS33 | PULLUP; # Center button (Active-Low Reset)
+NET "btn_step_i"        LOC = "C4"  | IOSTANDARD = LVCMOS33;          # Up button (Single-step pulse)
+
+# Slide Switches
+NET "sw_disp_sel_i<0>"  LOC = "T10" | IOSTANDARD = LVCMOS33; # SW0: Display Select bit 0
+NET "sw_disp_sel_i<1>"  LOC = "T9"  | IOSTANDARD = LVCMOS33; # SW1: Display Select bit 1
+NET "sw_step_mode_i"    LOC = "V9"  | IOSTANDARD = LVCMOS33; # SW2: 1=Continuous, 0=Single Step
+
+# Diagnostic LEDs
+NET "led_o<0>"          LOC = "U16" | IOSTANDARD = LVCMOS33; # RegWriteW
+NET "led_o<1>"          LOC = "V16" | IOSTANDARD = LVCMOS33; # Stall
+NET "led_o<2>"          LOC = "U15" | IOSTANDARD = LVCMOS33; # Flush
+NET "led_o<3>"          LOC = "V15" | IOSTANDARD = LVCMOS33; # Target Reg Non-Zero
+NET "led_o<4>"          LOC = "M11" | IOSTANDARD = LVCMOS33; # Clock Heartbeat
+NET "led_o<5>"          LOC = "N11" | IOSTANDARD = LVCMOS33; # Run Mode
+NET "led_o<6>"          LOC = "R11" | IOSTANDARD = LVCMOS33; # Boot / PC=0
+NET "led_o<7>"          LOC = "T11" | IOSTANDARD = LVCMOS33; # Reset Active
+
+# Seven-Segment Display Anodes (Active-Low)
+NET "anode_o<0>"        LOC = "N16" | IOSTANDARD = LVCMOS33; # Digit 0
+NET "anode_o<1>"        LOC = "N15" | IOSTANDARD = LVCMOS33; # Digit 1
+NET "anode_o<2>"        LOC = "P18" | IOSTANDARD = LVCMOS33; # Digit 2
+NET "anode_o<3>"        LOC = "P17" | IOSTANDARD = LVCMOS33; # Digit 3
+
+# Seven-Segment Display Cathodes (Active-Low)
+NET "seg_o<0>"          LOC = "T17" | IOSTANDARD = LVCMOS33; # CA
+NET "seg_o<1>"          LOC = "T18" | IOSTANDARD = LVCMOS33; # CB
+NET "seg_o<2>"          LOC = "U17" | IOSTANDARD = LVCMOS33; # CC
+NET "seg_o<3>"          LOC = "U18" | IOSTANDARD = LVCMOS33; # CD
+NET "seg_o<4>"          LOC = "M14" | IOSTANDARD = LVCMOS33; # CE
+NET "seg_o<5>"          LOC = "N14" | IOSTANDARD = LVCMOS33; # CF
+NET "seg_o<6>"          LOC = "L14" | IOSTANDARD = LVCMOS33; # CG
